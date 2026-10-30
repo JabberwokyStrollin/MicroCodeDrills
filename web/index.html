@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MicroCodeDrills</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">Micro<span>Code</span>Drills</div>
+  <div class="controls">
+    <select id="pack" aria-label="Pack"></select>
+    <select id="section" aria-label="Section"></select>
+    <button id="restart" class="ghost" title="Clear progress for this pack">Reset</button>
+  </div>
+</header>
+<div class="progress" aria-hidden="true"><div id="bar"></div></div>
+<main>
+  <div class="meta"><span id="counter"></span><span id="score"></span></div>
+  <p id="prompt" class="prompt"></p>
+  <div class="code">
+    <pre id="before"></pre>
+    <div class="editor"><span id="indent"></span><textarea id="answer" rows="1" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Your code"></textarea></div>
+    <pre id="after"></pre>
+  </div>
+  <div class="actions">
+    <button id="submit" class="primary">Submit</button>
+    <span class="hint">Ctrl/Cmd+Enter to submit. Tab inserts spaces.</span>
+  </div>
+  <div id="done" class="done" hidden></div>
+</main>
+
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mtitle">
+  <div class="card">
+    <h2 id="mtitle">Not quite</h2>
+    <div class="cols">
+      <div><h3>You wrote</h3><pre id="yours"></pre></div>
+      <div><h3>Expected</h3><pre id="expected"></pre></div>
+    </div>
+    <p id="why" class="why"></p>
+    <details id="detail"><summary>Compiler / test output</summary><pre id="output"></pre></details>
+    <div class="actions"><button id="next" class="primary">Next drill</button></div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

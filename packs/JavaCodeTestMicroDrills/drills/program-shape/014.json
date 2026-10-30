@@ -1,0 +1,9 @@
+{
+  "id": "014",
+  "section": "program-shape",
+  "prompt": "Read the next whitespace-delimited word into `String w`.",
+  "template": "import java.io.ByteArrayInputStream;\nimport java.util.Scanner;\n\npublic class Drill {\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        System.setIn(new ByteArrayInputStream(\"4 5 7000000000 word\\nabc def\\n\".getBytes()));\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        long big = sc.nextLong();\n        @@BLANK@@\n        sc.nextLine();\n        String line = sc.nextLine();\n        check(a + b, 9);\n        check(big, 7000000000L);\n        check(w, \"word\");\n        check(line, \"abc def\");\n        done();\n    }\n}\n",
+  "answer": "String w = sc.next();",
+  "why": "next() returns the next whitespace-delimited word and leaves the rest of the line unread.",
+  "mustContain": null
+}

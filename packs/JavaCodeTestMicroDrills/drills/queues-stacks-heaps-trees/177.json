@@ -1,0 +1,9 @@
+{
+  "id": "177",
+  "section": "queues-stacks-heaps-trees",
+  "prompt": "If the heap has more than k elements, remove the smallest.",
+  "template": "import java.util.Collections;\nimport java.util.PriorityQueue;\n\npublic class Drill {\n    static int kthLargest(int[] a, int k) {\n        PriorityQueue<Integer> minH = new PriorityQueue<>();\n        for (int x : a) {\n            minH.offer(x);\n            @@BLANK@@\n        }\n        return minH.peek();\n    }\n    static int kthSmallest(int[] a, int k) {\n        PriorityQueue<Integer> maxH = new PriorityQueue<>(Collections.reverseOrder());\n        for (int x : a) {\n            maxH.offer(x);\n            if (maxH.size() > k) maxH.poll();\n        }\n        return maxH.peek();\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(kthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2), 5);\n        check(kthSmallest(new int[]{3, 2, 1, 5, 6, 4}, 2), 2);\n        done();\n    }\n}\n",
+  "answer": "if (minH.size() > k) minH.poll();",
+  "why": "A min-heap capped at k elements keeps the k largest values: when size exceeds k, poll drops the smallest.",
+  "mustContain": null
+}

@@ -1,0 +1,9 @@
+{
+  "id": "172",
+  "section": "queues-stacks-heaps-trees",
+  "prompt": "Create `PriorityQueue<int[]> pq` ordered by [0], then [1], then [2], with Comparator.comparingInt((int[] a) -> a[0]) chained with thenComparingInt twice. (comparator-chain variant)",
+  "template": "import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Comparator;\nimport java.util.List;\nimport java.util.PriorityQueue;\n\npublic class Drill {\n    static List<int[]> merge(int[][] parts) {\n        @@BLANK@@\n        for (int p = 0; p < parts.length; p++) {\n            if (parts[p].length > 0) pq.offer(new int[]{parts[p][0], p, 0});\n        }\n        List<int[]> out = new ArrayList<>();\n        while (!pq.isEmpty()) {\n            int[] t = pq.poll();\n            out.add(new int[]{t[1], t[0]});\n            if (t[2] + 1 < parts[t[1]].length) {\n                pq.offer(new int[]{parts[t[1]][t[2] + 1], t[1], t[2] + 1});\n            }\n        }\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(Arrays.deepToString(merge(new int[][]{{1, 4, 9}, {2, 4}, {}, {0}}).toArray()),\n              \"[[3, 0], [0, 1], [1, 2], [0, 4], [1, 4], [0, 9]]\");\n        check(merge(new int[][]{}).size(), 0);\n        done();\n    }\n}\n",
+  "answer": "PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt((int[] a) -> a[0]).thenComparingInt(a -> a[1]).thenComparingInt(a -> a[2]));",
+  "why": "Comparator.comparingInt starts the chain; thenComparingInt adds each tie-breaker. The first lambda needs the explicit (int[] a) type.",
+  "mustContain": "thenComparingInt"
+}

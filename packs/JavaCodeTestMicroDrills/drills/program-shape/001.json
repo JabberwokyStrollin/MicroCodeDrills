@@ -1,0 +1,9 @@
+{
+  "id": "001",
+  "section": "program-shape",
+  "prompt": "Write the method signature: public static, named `solve`, returns int, takes `List<Integer> nums` and `int k`. (The complete-the-function layout used by online coding tests.)",
+  "template": "import java.util.List;\n\nclass Result {\n    @@BLANK@@\n        int count = 0;\n        for (int x : nums) if (x > k) count++;\n        return count;\n    }\n}\n\npublic class Drill {\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(Result.solve(List.of(1, 5, 9, 12), 4), 3);\n        done();\n    }\n}\n",
+  "answer": "public static int solve(List<Integer> nums, int k) {",
+  "why": "A complete-the-function test gives you the class; you write only the signature. It must be public static so it can be called as Result.solve(...), and the generic types need their `<Integer>`.",
+  "mustContain": null
+}

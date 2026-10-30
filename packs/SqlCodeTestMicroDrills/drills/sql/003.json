@@ -1,0 +1,9 @@
+{
+  "id": "003",
+  "section": "sql",
+  "prompt": "Group the rows by c.group_id.",
+  "template": "-- EXPECTED: [[\"billing\", 60], [\"zeta\", 60], [\"fraud\", 50], [\"analytics\", 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT c.group_id,\n       SUM(p.log_end_offset - c.committed_offset) AS total_lag\nFROM commits c\nJOIN partitions p ON p.topic = c.topic AND p.partition_id = c.partition_id\n@@BLANK@@\nHAVING SUM(p.log_end_offset - c.committed_offset) > 0\nORDER BY total_lag DESC, c.group_id ASC\n;\n",
+  "answer": "GROUP BY c.group_id",
+  "why": "GROUP BY collapses the rows to one per consumer group so SUM works per group.",
+  "mustContain": null
+}

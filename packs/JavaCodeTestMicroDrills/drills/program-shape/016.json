@@ -1,0 +1,9 @@
+{
+  "id": "016",
+  "section": "program-shape",
+  "prompt": "Read the entire next line, spaces included, into `String line`.",
+  "template": "import java.io.ByteArrayInputStream;\nimport java.util.Scanner;\n\npublic class Drill {\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        System.setIn(new ByteArrayInputStream(\"4 5 7000000000 word\\nabc def\\n\".getBytes()));\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        long big = sc.nextLong();\n        String w = sc.next();\n        sc.nextLine();\n        @@BLANK@@\n        check(a + b, 9);\n        check(big, 7000000000L);\n        check(w, \"word\");\n        check(line, \"abc def\");\n        done();\n    }\n}\n",
+  "answer": "String line = sc.nextLine();",
+  "why": "nextLine() returns the rest of the current line including spaces. Remember to consume any leftover newline first.",
+  "mustContain": null
+}

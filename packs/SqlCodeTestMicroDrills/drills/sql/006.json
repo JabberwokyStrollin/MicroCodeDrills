@@ -1,0 +1,9 @@
+{
+  "id": "006",
+  "section": "sql",
+  "prompt": "Return only the first 2 rows (the two groups with the most commits).",
+  "template": "-- EXPECTED: [[\"billing\", 3], [\"analytics\", 2]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT group_id, COUNT(*) AS n\nFROM commits\nGROUP BY group_id\nORDER BY n DESC, group_id ASC\n@@BLANK@@\n;\n",
+  "answer": "LIMIT 2",
+  "why": "LIMIT 2 returns the first two rows of the ordered result.",
+  "mustContain": null
+}

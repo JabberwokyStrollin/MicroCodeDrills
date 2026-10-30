@@ -1,0 +1,9 @@
+{
+  "id": "231",
+  "section": "algorithm-skeletons",
+  "prompt": "Same goal, if/put/get variant: if `m` lacks cl[i], put a new ArrayDeque for it; then `Deque<Integer> q = m.get(cl[i]);`.",
+  "template": "import java.util.ArrayDeque;\nimport java.util.ArrayList;\nimport java.util.Deque;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static List<String> rateLimit(int[] ts, String[] cl, int limit, int window) {\n        Map<String, Deque<Integer>> m = new HashMap<>();\n        List<String> out = new ArrayList<>();\n        for (int i = 0; i < ts.length; i++) {\n            @@BLANK@@\n            while (!q.isEmpty() && q.peekFirst() <= ts[i] - window) q.pollFirst();\n            if (q.size() < limit) {\n                q.addLast(ts[i]);\n                out.add(\"ALLOW\");\n            } else {\n                out.add(\"DENY\");\n            }\n        }\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(rateLimit(new int[]{1, 2, 3, 11, 12, 12}, new String[]{\"a\", \"a\", \"a\", \"a\", \"a\", \"b\"}, 2, 10),\n              \"[ALLOW, ALLOW, DENY, ALLOW, ALLOW, ALLOW]\");\n        check(rateLimit(new int[]{1, 1}, new String[]{\"a\", \"a\"}, 0, 5), \"[DENY, DENY]\");\n        done();\n    }\n}\n",
+  "answer": "if (!m.containsKey(cl[i])) m.put(cl[i], new ArrayDeque<>());\nDeque<Integer> q = m.get(cl[i]);",
+  "why": "The if/put/get form does the same in two steps; use containsKey then put then get.",
+  "mustContain": "containsKey"
+}

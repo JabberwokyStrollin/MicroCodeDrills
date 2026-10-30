@@ -1,0 +1,9 @@
+{
+  "id": "011",
+  "section": "program-shape",
+  "prompt": "Create `Scanner sc` reading standard input.",
+  "template": "import java.io.ByteArrayInputStream;\nimport java.util.Scanner;\n\npublic class Drill {\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        System.setIn(new ByteArrayInputStream(\"4 5 7000000000 word\\nabc def\\n\".getBytes()));\n        @@BLANK@@\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        long big = sc.nextLong();\n        String w = sc.next();\n        sc.nextLine();\n        String line = sc.nextLine();\n        check(a + b, 9);\n        check(big, 7000000000L);\n        check(w, \"word\");\n        check(line, \"abc def\");\n        done();\n    }\n}\n",
+  "answer": "Scanner sc = new Scanner(System.in);",
+  "why": "Scanner takes the input stream as its constructor argument: new Scanner(System.in).",
+  "mustContain": null
+}

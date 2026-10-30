@@ -1,0 +1,9 @@
+{
+  "id": "195",
+  "section": "queues-stacks-heaps-trees",
+  "prompt": "Return |x| + |y| of Point `p`, reading components through the record accessors p.x() and p.y().",
+  "template": "public class Drill {\n    static class Pair {\n        int a, b;\n        Pair(int a, int b) { this.a = a; this.b = b; }\n    }\n    record Point(int x, int y) {}\n\n    static int sum(Pair p) { return p.a + p.b; }\n    static int manhattan(Point p) {\n        @@BLANK@@\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(sum(new Pair(3, 4)), 7);\n        Point p = new Point(3, -4);\n        check(manhattan(p), 7);\n        done();\n    }\n}\n",
+  "answer": "return Math.abs(p.x()) + Math.abs(p.y());",
+  "why": "Record components are read through accessor methods: p.x() and p.y().",
+  "mustContain": null
+}

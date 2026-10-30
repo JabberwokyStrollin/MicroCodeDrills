@@ -1,0 +1,56 @@
+{
+  "id": "JavaCodeTestMicroDrills",
+  "title": "Java Code-Test Micro Drills",
+  "language": "java",
+  "sourceFile": "Drill.java",
+  "blankMarker": "@@BLANK@@",
+  "compile": [
+    "javac",
+    "-d",
+    "{outDir}",
+    "{file}"
+  ],
+  "run": [
+    "java",
+    "-cp",
+    "{outDir}",
+    "Drill"
+  ],
+  "timeoutSeconds": 15,
+  "passToken": "PASS",
+  "sections": [
+    {
+      "id": "program-shape",
+      "title": "Program Shape"
+    },
+    {
+      "id": "collections",
+      "title": "Collections"
+    },
+    {
+      "id": "strings",
+      "title": "Strings"
+    },
+    {
+      "id": "sorting",
+      "title": "Sorting and Comparators"
+    },
+    {
+      "id": "queues-stacks-heaps-trees",
+      "title": "Queues, Stacks, Heaps, Trees"
+    },
+    {
+      "id": "numbers-streams",
+      "title": "Numbers and Streams"
+    },
+    {
+      "id": "algorithm-skeletons",
+      "title": "Algorithm Skeletons"
+    },
+    {
+      "id": "imports",
+      "title": "Imports"
+    }
+  ],
+  "count": 264
+}

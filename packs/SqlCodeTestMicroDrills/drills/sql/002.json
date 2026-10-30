@@ -1,0 +1,9 @@
+{
+  "id": "002",
+  "section": "sql",
+  "prompt": "Join `partitions p` on BOTH keys: topic and partition_id.",
+  "template": "-- EXPECTED: [[\"billing\", 60], [\"zeta\", 60], [\"fraud\", 50], [\"analytics\", 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT c.group_id,\n       SUM(p.log_end_offset - c.committed_offset) AS total_lag\nFROM commits c\n@@BLANK@@\nGROUP BY c.group_id\nHAVING SUM(p.log_end_offset - c.committed_offset) > 0\nORDER BY total_lag DESC, c.group_id ASC\n;\n",
+  "answer": "JOIN partitions p ON p.topic = c.topic AND p.partition_id = c.partition_id",
+  "why": "The composite key needs both columns: topic and partition_id. Joining on one alone matches rows from other topics.",
+  "mustContain": null
+}

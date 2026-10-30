@@ -1,0 +1,9 @@
+{
+  "id": "249",
+  "section": "algorithm-skeletons",
+  "prompt": "Sort `es` by count descending, then key ascending: one lambda (a, b), compare values with Integer.compare(b, a) when they differ (use .equals on the boxed values), else compare keys.",
+  "template": "import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static String top(List<String> words) {\n        Map<String, Integer> f = new HashMap<>();\n        for (String w : words) f.merge(w, 1, Integer::sum);\n        List<Map.Entry<String, Integer>> es = new ArrayList<>(f.entrySet());\n        @@BLANK@@\n        return es.get(0).getKey() + \" \" + es.get(0).getValue();\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(top(List.of(\"b\", \"a\", \"b\", \"c\", \"a\")), \"a 2\");\n        check(top(List.of(\"x\", \"y\", \"y\")), \"y 2\");\n        done();\n    }\n}\n",
+  "answer": "es.sort((a, b) -> !b.getValue().equals(a.getValue())\n        ? Integer.compare(b.getValue(), a.getValue())\n        : a.getKey().compareTo(b.getKey()));",
+  "why": "Compare counts with b before a for descending, and use equals on the boxed Integers because == compares references.",
+  "mustContain": null
+}

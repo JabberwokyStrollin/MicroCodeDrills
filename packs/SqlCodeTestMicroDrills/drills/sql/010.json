@@ -1,0 +1,9 @@
+{
+  "id": "010",
+  "section": "sql",
+  "prompt": "Filter to commits whose topic is IN a subquery selecting topics from partitions where log_end_offset > 100.",
+  "template": "-- EXPECTED: [[\"analytics\"], [\"billing\"], [\"fraud\"], [\"zeta\"]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT DISTINCT group_id\nFROM commits\n@@BLANK@@\nORDER BY group_id;\n",
+  "answer": "WHERE topic IN (SELECT topic FROM partitions WHERE log_end_offset > 100)",
+  "why": "IN with a subquery filters to values returned by the inner query.",
+  "mustContain": null
+}

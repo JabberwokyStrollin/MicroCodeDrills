@@ -1,0 +1,9 @@
+{
+  "id": "005",
+  "section": "collections",
+  "prompt": "Get the value of key 'z' from `m`, using 0 when it is missing, into `z`. Use the dict method with a default.",
+  "template": "def check(got, exp):\n    print('PASS' if got == exp else f'FAIL: got {got!r} expected {exp!r}')\n\nm = {'a': 1}\n@@BLANK@@\ncheck(z, 0)\n",
+  "answer": "z = m.get('z', 0)",
+  "why": "dict.get(key, default) returns the default instead of raising KeyError.",
+  "mustContain": null
+}

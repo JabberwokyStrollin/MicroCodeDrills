@@ -1,0 +1,20 @@
+{
+  "id": "PythonCodeTestMicroDrills",
+  "title": "Python Code-Test Micro Drills (starter)",
+  "language": "python",
+  "sourceFile": "drill.py",
+  "blankMarker": "@@BLANK@@",
+  "run": [
+    "python3",
+    "{file}"
+  ],
+  "timeoutSeconds": 10,
+  "passToken": "PASS",
+  "sections": [
+    {
+      "id": "collections",
+      "title": "Collections"
+    }
+  ],
+  "count": 6
+}

@@ -1,0 +1,9 @@
+build/
+.gradle/
+out/
+*.class
+progress/
+.idea/
+.vscode/
+.DS_Store
+__pycache__/

@@ -1,0 +1,21 @@
+{
+  "id": "SqlCodeTestMicroDrills",
+  "title": "SQL Code-Test Micro Drills",
+  "language": "sql",
+  "sourceFile": "drill.sql",
+  "blankMarker": "@@BLANK@@",
+  "run": [
+    "python3",
+    "{packDir}/runner/run_sql.py",
+    "{file}"
+  ],
+  "timeoutSeconds": 10,
+  "passToken": "PASS",
+  "sections": [
+    {
+      "id": "sql",
+      "title": "SQL"
+    }
+  ],
+  "count": 15
+}

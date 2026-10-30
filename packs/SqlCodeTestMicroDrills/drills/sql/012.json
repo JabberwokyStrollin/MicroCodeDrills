@@ -1,0 +1,9 @@
+{
+  "id": "012",
+  "section": "sql",
+  "prompt": "Keep only the first-ranked row of each group.",
+  "template": "-- EXPECTED: [[\"analytics\", \"orders\", 210], [\"archive\", \"audit\", 10], [\"billing\", \"orders\", 200], [\"fraud\", \"orders\", 80], [\"zeta\", \"orders\", 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT group_id, topic, committed_offset FROM (\n  SELECT group_id, topic, committed_offset,\n         ROW_NUMBER() OVER (PARTITION BY group_id ORDER BY committed_offset DESC) AS rn\n  FROM commits\n)\n@@BLANK@@\nORDER BY group_id;\n",
+  "answer": "WHERE rn = 1",
+  "why": "Filtering rn = 1 keeps only the top row of each group.",
+  "mustContain": null
+}

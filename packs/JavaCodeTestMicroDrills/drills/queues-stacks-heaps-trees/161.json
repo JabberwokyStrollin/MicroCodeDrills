@@ -1,0 +1,9 @@
+{
+  "id": "161",
+  "section": "queues-stacks-heaps-trees",
+  "prompt": "If the stack is empty, return false.",
+  "template": "import java.util.ArrayDeque;\nimport java.util.Deque;\n\npublic class Drill {\n    static boolean balanced(String s) {\n        Deque<Character> st = new ArrayDeque<>();\n        for (char c : s.toCharArray()) {\n            if (\"([{\".indexOf(c) >= 0) st.push(c);\n            else {\n                @@BLANK@@\n                char o = st.pop();\n                if (\"([{\".indexOf(o) != \")]}\".indexOf(c)) return false;\n            }\n        }\n        return st.isEmpty();\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(balanced(\"([]{})\"), true);\n        check(balanced(\"(]\"), false);\n        check(balanced(\"((\"), false);\n        check(balanced(\")\"), false);\n        done();\n    }\n}\n",
+  "answer": "if (st.isEmpty()) return false;",
+  "why": "If there is nothing to match a closer against, the brackets are unbalanced.",
+  "mustContain": null
+}

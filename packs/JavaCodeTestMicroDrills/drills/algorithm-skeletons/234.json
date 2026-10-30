@@ -1,0 +1,9 @@
+{
+  "id": "234",
+  "section": "algorithm-skeletons",
+  "prompt": "If this word needs more pairs than are left, stop the loop.",
+  "template": "import java.util.Arrays;\n\npublic class Drill {\n    static int maxPal(String[] words) {\n        int[] c = new int[26];\n        int[] len = new int[words.length];\n        for (int i = 0; i < words.length; i++) {\n            len[i] = words[i].length();\n            for (char ch : words[i].toCharArray()) c[ch - 'a']++;\n        }\n        int pairs = 0;\n        for (int x : c) pairs += x / 2;\n        Arrays.sort(len);\n        int res = 0;\n        for (int L : len) {\n            int need = L / 2;\n            @@BLANK@@\n            pairs -= need;\n            res++;\n        }\n        return res;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(maxPal(new String[]{\"abbb\", \"ba\", \"aa\"}), 3);\n        check(maxPal(new String[]{\"abc\", \"ab\"}), 2);\n        check(maxPal(new String[]{\"cd\", \"ef\", \"a\"}), 1);\n        check(maxPal(new String[]{\"abcd\", \"ef\", \"gh\"}), 0);\n        done();\n    }\n}\n",
+  "answer": "if (need > pairs) break;",
+  "why": "If a word needs more pairs than remain, no longer word can be satisfied either, so break.",
+  "mustContain": null
+}

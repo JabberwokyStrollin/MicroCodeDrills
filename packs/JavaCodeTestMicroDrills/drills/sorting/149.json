@@ -1,0 +1,9 @@
+{
+  "id": "149",
+  "section": "sorting",
+  "prompt": "Loop over every bucket (the TreeMap's values), loop variable `bucket`.",
+  "template": "import java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.List;\nimport java.util.TreeMap;\n\npublic class Drill {\n    static int weigh(String str) {\n        return str.chars().sum();\n    }\n    static List<String> asciiSort(List<String> words) {\n        TreeMap<Integer, List<String>> byWeight = new TreeMap<>();\n        for (String s : words) {\n            byWeight.computeIfAbsent(weigh(s), k -> new ArrayList<>()).add(s);\n        }\n        List<String> out = new ArrayList<>(words.size());\n        @@BLANK@@\n            Collections.sort(bucket);\n            out.addAll(bucket);\n        }\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(asciiSort(List.of(\"bca\", \"abc\", \"d\")), \"[d, abc, bca]\");\n        check(asciiSort(List.of(\"b\", \"a\", \"a\")), \"[a, a, b]\");\n        done();\n    }\n}\n",
+  "answer": "for (List<String> bucket : byWeight.values()) {",
+  "why": "values() iterates the buckets in key order for a TreeMap.",
+  "mustContain": null
+}

@@ -1,0 +1,9 @@
+{
+  "id": "191",
+  "section": "queues-stacks-heaps-trees",
+  "prompt": "Remove and return the smallest element of `ts` into `int tp`.",
+  "template": "import java.util.List;\nimport java.util.Map;\nimport java.util.TreeMap;\nimport java.util.TreeSet;\n\npublic class Drill {\n    static String run() {\n        TreeMap<Integer, String> tm = new TreeMap<>();\n        tm.put(5, \"e\");\n        tm.put(1, \"a\");\n        tm.put(9, \"i\");\n        int lo = tm.firstKey();\n        int hi = tm.lastKey();\n        Integer f = tm.floorKey(6);\n        Integer c = tm.ceilingKey(6);\n        Integer lw = tm.lowerKey(5);\n        Integer hg = tm.higherKey(5);\n        Map.Entry<Integer, String> p = tm.pollFirstEntry();\n        TreeSet<Integer> ts = new TreeSet<>(List.of(5, 1, 9));\n        Integer tf = ts.floor(6);\n        Integer tc = ts.ceiling(6);\n        int tfi = ts.first();\n        @@BLANK@@\n        return lo + \" \" + hi + \" \" + f + \" \" + c + \" \" + lw + \" \" + hg + \" \" + p.getValue() + \" \" + tm.size()\n                + \" \" + tf + \" \" + tc + \" \" + tfi + \" \" + tp + \" \" + ts.size();\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(run(), \"1 9 5 9 1 9 a 2 5 9 1 1 2\");\n        done();\n    }\n}\n",
+  "answer": "int tp = ts.pollFirst();",
+  "why": "pollFirst removes and returns the smallest element; it returns null if the set is empty.",
+  "mustContain": null
+}
