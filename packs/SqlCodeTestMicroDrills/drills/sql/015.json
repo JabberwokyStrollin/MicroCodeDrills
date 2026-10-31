@@ -1,9 +1,0 @@
-{
-  "id": "015",
-  "section": "sql",
-  "prompt": "After grouping, keep only groups with more than one row. This filters GROUPS, so use HAVING with COUNT(*).",
-  "template": "-- EXPECTED: [[\"analytics\", 2], [\"billing\", 2]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT group_id, COUNT(*) AS n\nFROM commits\nWHERE committed_offset > 50\nGROUP BY group_id\n@@BLANK@@\nORDER BY group_id;\n",
-  "answer": "HAVING COUNT(*) > 1",
-  "why": "HAVING with COUNT(*) filters groups after grouping.",
-  "mustContain": null
-}

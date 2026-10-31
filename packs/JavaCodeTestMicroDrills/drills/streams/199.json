@@ -1,0 +1,12 @@
+{
+  "id": "199",
+  "topic": "streams",
+  "prompt": "Count how many Strings of each length are in the list `words`, storing the result in a new `Map<Integer, Long> byLen`. Chain: stream the list, then collect with Collectors.groupingBy, using String::length as the grouping function and Collectors.counting() as the downstream collector.",
+  "given": [
+    "List<String> words"
+  ],
+  "template": "import java.util.Arrays;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.stream.Collectors;\nimport java.util.stream.IntStream;\n\npublic class Drill {\n    static String run() {\n        List<Integer> nums = List.of(4, 8, 15, 16);\n        List<String> words = List.of(\"bb\", \"a\", \"ccc\", \"bb\");\n        int[] arr = {3, 9, 2};\n        int sum = nums.stream().mapToInt(Integer::intValue).sum();\n        int mx = Arrays.stream(arr).max().getAsInt();\n        List<Integer> boxed = Arrays.stream(arr).boxed().collect(Collectors.toList());\n        int range = IntStream.rangeClosed(1, 4).sum();\n        int longest = words.stream().mapToInt(String::length).max().getAsInt();\n        List<String> sorted = words.stream().sorted().collect(Collectors.toList());\n        @@BLANK@@\n        String joined = words.stream().map(String::toUpperCase).collect(Collectors.joining(\",\"));\n        int codes = \"ab\".chars().sum();\n        return sum + \" \" + mx + \" \" + boxed + \" \" + range + \" \" + longest + \" \" + sorted + \" \" + byLen + \" \" + joined + \" \" + codes;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(run(), \"43 9 [3, 9, 2] 10 3 [a, bb, bb, ccc] {1=1, 2=2, 3=1} BB,A,CCC,BB 195\");\n        done();\n    }\n}\n",
+  "answer": "Map<Integer, Long> byLen = words.stream().collect(Collectors.groupingBy(String::length, Collectors.counting()));",
+  "why": "groupingBy(String::length, counting()) builds a Map<Integer, Long>; counting yields Long, not Integer.",
+  "mustContain": null
+}

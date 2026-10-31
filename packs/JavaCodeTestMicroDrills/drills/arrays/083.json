@@ -1,0 +1,12 @@
+{
+  "id": "083",
+  "topic": "arrays",
+  "prompt": "Store in a new boolean named `same` whether the int array `a` has exactly the same contents as a new array {-1, -1, -1}. Use Arrays.equals and create the second array inline with new int[]{...}.",
+  "given": [
+    "int[] a"
+  ],
+  "template": "import java.util.Arrays;\n\npublic class Drill {\n    static String run() {\n        int[] a = new int[3];\n        int[][] g = new int[2][4];\n        Arrays.fill(a, -1);\n        int[] b = {5, 3, 9, 1};\n        Arrays.sort(b);\n        int[] c = Arrays.copyOf(b, 6);\n        int[] r = Arrays.copyOfRange(b, 1, 3);\n        @@BLANK@@\n        String s1 = Arrays.toString(b);\n        String s2 = Arrays.deepToString(g);\n        int n = b.length;\n        return s1 + \" \" + s2 + \" \" + Arrays.toString(c) + \" \" + Arrays.toString(r) + \" \" + same + \" \" + n + \" \" + Arrays.toString(a);\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(run(), \"[1, 3, 5, 9] [[0, 0, 0, 0], [0, 0, 0, 0]] [1, 3, 5, 9, 0, 0] [3, 5] true 4 [-1, -1, -1]\");\n        done();\n    }\n}\n",
+  "answer": "boolean same = Arrays.equals(a, new int[]{-1, -1, -1});",
+  "why": "Arrays.equals compares contents. == on arrays only compares references.",
+  "mustContain": null
+}

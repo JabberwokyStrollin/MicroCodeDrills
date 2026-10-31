@@ -54,7 +54,7 @@ final class Server {
                 Pack p = packs.get(query(x, "pack"));
                 if (p == null) { json(x, 404, err("unknown pack")); return; }
                 List<Object> out = new ArrayList<>();
-                for (Pack.Drill d : p.drills()) out.add(Map.of("id", d.id(), "section", d.section()));
+                for (Pack.Drill d : p.drills()) out.add(Map.of("id", d.id(), "topic", d.topic()));
                 json(x, 200, out);
             } else if (method.equals("GET") && path.equals("/api/drill")) {
                 Pack p = packs.get(query(x, "pack"));
@@ -84,29 +84,23 @@ final class Server {
     }
 
     private static Map<String, Object> packSummary(Pack p) {
-        List<Object> secs = new ArrayList<>();
-        for (Pack.Section s : p.sections()) {
-            long count = p.drills().stream().filter(d -> d.section().equals(s.id())).count();
-            secs.add(Map.of("id", s.id(), "title", s.title(), "count", count));
+        List<Object> tops = new ArrayList<>();
+        for (Pack.Topic s : p.topics()) {
+            long count = p.drills().stream().filter(d -> d.topic().equals(s.id())).count();
+            tops.add(Map.of("id", s.id(), "title", s.title(), "count", count));
         }
         return Map.of("id", p.id(), "title", p.title(), "language", p.language(),
-                "count", p.drills().size(), "sections", secs);
+                "count", p.drills().size(), "topics", tops);
     }
 
-    /** The template is split around the blank so the UI can show code before and after the editor. */
+    /** Only the prompt and the referenced variable declarations are shown; the template stays server-side. */
     private static Map<String, Object> drillView(Pack p, Pack.Drill d) {
-        String t = d.template();
-        int at = t.indexOf(p.blankMarker());
-        int lineStart = t.lastIndexOf('\n', at) + 1;
-        int lineEnd = t.indexOf('\n', at);
         Map<String, Object> m = new LinkedHashMap<>();
         m.put("id", d.id());
-        m.put("section", d.section());
+        m.put("topic", d.topic());
         m.put("prompt", d.prompt());
+        m.put("given", d.given());
         m.put("language", p.language());
-        m.put("before", t.substring(0, lineStart));
-        m.put("indent", t.substring(lineStart, at));
-        m.put("after", lineEnd < 0 ? "" : t.substring(lineEnd + 1));
         return m;
     }
 

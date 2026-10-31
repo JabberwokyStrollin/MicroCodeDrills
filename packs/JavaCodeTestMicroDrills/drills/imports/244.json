@@ -1,0 +1,10 @@
+{
+  "id": "244",
+  "topic": "imports",
+  "prompt": "Write the import statement for the class StringTokenizer. Use its complete package path (for example java.util.Something) and do not use a wildcard (*).",
+  "given": [],
+  "template": "@@BLANK@@\n\npublic class Drill {\n    public static void main(String[] args) {\n        StringTokenizer x = new StringTokenizer(\"a b\");\n        System.out.println(\"PASS\");\n    }\n}\n",
+  "answer": "import java.util.StringTokenizer;",
+  "why": "StringTokenizer splits a line into whitespace-separated tokens.",
+  "mustContain": "importjava.util.StringTokenizer;"
+}

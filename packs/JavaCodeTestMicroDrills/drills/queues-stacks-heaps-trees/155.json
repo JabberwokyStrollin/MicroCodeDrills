@@ -1,9 +1,0 @@
-{
-  "id": "155",
-  "section": "queues-stacks-heaps-trees",
-  "prompt": "Add ts[i] to the back of `q` with plain add. (add variant)",
-  "template": "import java.util.ArrayDeque;\nimport java.util.ArrayList;\nimport java.util.Deque;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static List<String> rateLimit(int[] ts, String[] cl, int limit, int window) {\n        Map<String, Deque<Integer>> m = new HashMap<>();\n        List<String> out = new ArrayList<>();\n        for (int i = 0; i < ts.length; i++) {\n            Deque<Integer> q = m.computeIfAbsent(cl[i], k -> new ArrayDeque<>());\n            while (!q.isEmpty() && q.peekFirst() <= ts[i] - window) q.pollFirst();\n            if (q.size() < limit) {\n                @@BLANK@@\n                out.add(\"ALLOW\");\n            } else {\n                out.add(\"DENY\");\n            }\n        }\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(rateLimit(new int[]{1, 2, 3, 11, 12, 12}, new String[]{\"a\", \"a\", \"a\", \"a\", \"a\", \"b\"}, 2, 10),\n              \"[ALLOW, ALLOW, DENY, ALLOW, ALLOW, ALLOW]\");\n        check(rateLimit(new int[]{1, 1}, new String[]{\"a\", \"a\"}, 0, 5), \"[DENY, DENY]\");\n        done();\n    }\n}\n",
-  "answer": "q.add(ts[i]);",
-  "why": "add on a Deque is the same as addLast.",
-  "mustContain": "q.add("
-}

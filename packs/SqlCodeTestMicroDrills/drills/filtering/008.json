@@ -1,0 +1,13 @@
+{
+  "id": "008",
+  "topic": "filtering",
+  "prompt": "Write the clause that filters the groups after grouping, keeping only groups that have more than one row: HAVING with COUNT(*) greater than 1.",
+  "given": [
+    "commits(group_id, topic, partition_id, committed_offset)",
+    "Query: SELECT group_id, COUNT(*) AS n FROM commits WHERE committed_offset > 50 GROUP BY group_id <your clause>"
+  ],
+  "template": "-- EXPECTED: [[\"analytics\", 2], [\"billing\", 2]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT group_id, COUNT(*) AS n\nFROM commits\nWHERE committed_offset > 50\nGROUP BY group_id\n@@BLANK@@\nORDER BY group_id;\n",
+  "answer": "HAVING COUNT(*) > 1",
+  "why": "HAVING with COUNT(*) filters groups after grouping.",
+  "mustContain": null
+}

@@ -1,0 +1,16 @@
+{
+  "id": "206",
+  "topic": "patterns",
+  "prompt": "Interval sweep: while pointer `j` is below `n` and the end time en[j] is less than or equal to the current start `s`, advance j by one and decrease `rooms` by one. Write one while loop with the two statements inside braces on the same line.",
+  "given": [
+    "int n",
+    "int[] en",
+    "int j",
+    "int rooms",
+    "int s"
+  ],
+  "template": "import java.util.Arrays;\nimport java.util.List;\n\npublic class Drill {\n    static int minMeetingRooms(List<List<Integer>> intervals) {\n        int n = intervals.size();\n        int[] st = new int[n], en = new int[n];\n        for (int i = 0; i < n; i++) {\n            st[i] = intervals.get(i).get(0);\n            en[i] = intervals.get(i).get(1);\n        }\n        Arrays.sort(st);\n        Arrays.sort(en);\n        int rooms = 0, best = 0, j = 0;\n        for (int s : st) {\n            @@BLANK@@\n            rooms++;\n            best = Math.max(best, rooms);\n        }\n        return best;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(minMeetingRooms(List.of(List.of(5, 7), List.of(1, 10), List.of(2, 3))), 2);\n        check(minMeetingRooms(List.of(List.of(1, 2), List.of(2, 3))), 1);\n        check(minMeetingRooms(List.of(List.of(1, 5), List.of(1, 5), List.of(5, 6), List.of(5, 6))), 2);\n        check(minMeetingRooms(List.of(List.of(10, 20), List.of(1, 5), List.of(2, 6))), 2);\n        check(minMeetingRooms(List.of()), 0);\n        done();\n    }\n}\n",
+  "answer": "while (j < n && en[j] <= s) { j++; rooms--; }",
+  "why": "While meetings have ended at or before this start, advance the end pointer and free a room.",
+  "mustContain": null
+}

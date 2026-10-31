@@ -1,9 +1,0 @@
-{
-  "id": "015",
-  "section": "program-shape",
-  "prompt": "Consume the leftover newline at the end of the current line: call the line-reading method and ignore its result.",
-  "template": "import java.io.ByteArrayInputStream;\nimport java.util.Scanner;\n\npublic class Drill {\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        System.setIn(new ByteArrayInputStream(\"4 5 7000000000 word\\nabc def\\n\".getBytes()));\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        long big = sc.nextLong();\n        String w = sc.next();\n        @@BLANK@@\n        String line = sc.nextLine();\n        check(a + b, 9);\n        check(big, 7000000000L);\n        check(w, \"word\");\n        check(line, \"abc def\");\n        done();\n    }\n}\n",
-  "answer": "sc.nextLine();",
-  "why": "After nextInt() or next(), the newline is still in the buffer. A bare nextLine() swallows it so the next nextLine() returns the real line.",
-  "mustContain": null
-}

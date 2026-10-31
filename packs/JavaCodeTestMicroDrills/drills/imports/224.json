@@ -1,0 +1,10 @@
+{
+  "id": "224",
+  "topic": "imports",
+  "prompt": "Write the import statement for the class ArrayList. Use its complete package path (for example java.util.Something) and do not use a wildcard (*).",
+  "given": [],
+  "template": "@@BLANK@@\n\npublic class Drill {\n    public static void main(String[] args) {\n        ArrayList<Integer> x = new ArrayList<>();\n        System.out.println(\"PASS\");\n    }\n}\n",
+  "answer": "import java.util.ArrayList;",
+  "why": "ArrayList is the usual growable list implementation.",
+  "mustContain": "importjava.util.ArrayList;"
+}

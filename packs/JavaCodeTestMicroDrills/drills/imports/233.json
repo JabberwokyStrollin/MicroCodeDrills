@@ -1,0 +1,10 @@
+{
+  "id": "233",
+  "topic": "imports",
+  "prompt": "Write the import statement for the class Set. Use its complete package path (for example java.util.Something) and do not use a wildcard (*).",
+  "given": [],
+  "template": "@@BLANK@@\n\npublic class Drill {\n    public static void main(String[] args) {\n        Set<Integer> x = null;\n        System.out.println(\"PASS\");\n    }\n}\n",
+  "answer": "import java.util.Set;",
+  "why": "Set is the interface type for sets.",
+  "mustContain": "importjava.util.Set;"
+}

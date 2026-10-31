@@ -1,0 +1,13 @@
+{
+  "id": "133",
+  "topic": "lambdas",
+  "prompt": "Sort the list `out` by weight and then alphabetically using a Comparator chain that uses the explicit type witness instead of a typed lambda. Start with Comparator.<String>comparingInt and the method reference w::get, then chain thenComparing(Comparator.naturalOrder()).",
+  "given": [
+    "Map<String, Integer> w",
+    "List<String> out"
+  ],
+  "template": "import java.util.ArrayList;\nimport java.util.Comparator;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static int weigh(String str) {\n        int total = 0;\n        for (char ch : str.toCharArray()) total += ch;\n        return total;\n    }\n    static List<String> asciiSort(List<String> words) {\n        Map<String, Integer> w = new HashMap<>();\n        for (String s : words) {\n            w.putIfAbsent(s, weigh(s));\n        }\n        List<String> out = new ArrayList<>(words);\n        @@BLANK@@\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(asciiSort(List.of(\"abc\", \"bca\", \"d\")), \"[d, abc, bca]\");\n        check(asciiSort(List.of(\"b\", \"a\", \"a\")), \"[a, a, b]\");\n        check(asciiSort(List.of()), \"[]\");\n        done();\n    }\n}\n",
+  "answer": "out.sort(Comparator.<String>comparingInt(w::get).thenComparing(Comparator.naturalOrder()));",
+  "why": "The explicit type witness Comparator.<String>comparingInt gives the compiler the type so w::get works.",
+  "mustContain": "<String>comparingInt"
+}

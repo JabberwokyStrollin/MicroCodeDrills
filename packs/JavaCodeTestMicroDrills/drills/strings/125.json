@@ -1,9 +1,0 @@
-{
-  "id": "125",
-  "section": "strings",
-  "prompt": "Build the reverse of `s` as `String r` (StringBuilder), then return whether `s` equals `r`. (reverse variant)",
-  "template": "public class Drill {\n    static boolean isPalindrome(String s) {\n        @@BLANK@@\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(isPalindrome(\"racecar\"), true);\n        check(isPalindrome(\"abca\"), false);\n        check(isPalindrome(\"a\"), true);\n        check(isPalindrome(\"\"), true);\n        done();\n    }\n}\n",
-  "answer": "String r = new StringBuilder(s).reverse().toString();\nreturn s.equals(r);",
-  "why": "Reverse variant: build the reverse with StringBuilder, then compare with equals, never ==.",
-  "mustContain": "reverse()"
-}

@@ -1,9 +1,0 @@
-{
-  "id": "061",
-  "section": "collections",
-  "prompt": "Read the value of entry `e` into `List<String> group`.",
-  "template": "import java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static String run() {\n        List<String> words = List.of(\"hi\", \"yo\", \"cat\", \"dog\", \"emu\", \"a\");\n        Map<Integer, List<String>> g = new HashMap<>();\n        for (String w : words) {\n            g.computeIfAbsent(w.length(), k -> new ArrayList<>()).add(w);\n        }\n        int total = 0;\n        for (Map.Entry<Integer, List<String>> e : g.entrySet()) {\n            int len = e.getKey();\n            @@BLANK@@\n            total += len * group.size();\n        }\n        int keys = 0;\n        for (int k : g.keySet()) keys += k;\n        int count = 0;\n        for (List<String> v : g.values()) count += v.size();\n        return total + \" \" + keys + \" \" + count;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(run(), \"14 6 6\");\n        done();\n    }\n}\n",
-  "answer": "List<String> group = e.getValue();",
-  "why": "getValue() on the entry returns the value, here the list for that key.",
-  "mustContain": null
-}

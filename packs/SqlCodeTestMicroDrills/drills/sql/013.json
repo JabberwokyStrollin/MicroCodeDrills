@@ -1,9 +1,0 @@
-{
-  "id": "013",
-  "section": "sql",
-  "prompt": "Label each partition 'big' if log_end_offset >= 100, otherwise 'small', with CASE WHEN ... END, aliased size.",
-  "template": "-- EXPECTED: [[\"audit\", 0, \"small\"], [\"empty\", 0, \"small\"], [\"orders\", 0, \"big\"], [\"orders\", 1, \"big\"], [\"payments\", 0, \"small\"]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT topic, partition_id,\n       @@BLANK@@\nFROM partitions\nORDER BY topic, partition_id;\n",
-  "answer": "CASE WHEN log_end_offset >= 100 THEN 'big' ELSE 'small' END AS size",
-  "why": "CASE WHEN ... THEN ... ELSE ... END is the SQL conditional expression.",
-  "mustContain": null
-}

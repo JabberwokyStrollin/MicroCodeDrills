@@ -4,31 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MicroCodeDrills</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <header>
-  <div class="brand">Micro<span>Code</span>Drills</div>
-  <div class="controls">
-    <select id="pack" aria-label="Pack"></select>
-    <select id="section" aria-label="Section"></select>
-    <button id="restart" class="ghost" title="Clear progress for this pack">Reset</button>
+  <button id="brand" class="brand" title="Back to pack list">Micro<span>Code</span>Drills</button>
+  <div id="controls" class="controls" hidden>
+    <button id="toPacks" class="ghost">Packs</button>
+    <button id="toTopics" class="ghost">Topics</button>
+    <label class="sw">Topic <select id="topicSel" aria-label="Switch topic"></select></label>
   </div>
 </header>
 <div class="progress" aria-hidden="true"><div id="bar"></div></div>
 <main>
-  <div class="meta"><span id="counter"></span><span id="score"></span></div>
-  <p id="prompt" class="prompt"></p>
-  <div class="code">
-    <pre id="before"></pre>
-    <div class="editor"><span id="indent"></span><textarea id="answer" rows="1" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Your code"></textarea></div>
-    <pre id="after"></pre>
-  </div>
-  <div class="actions">
-    <button id="submit" class="primary">Submit</button>
-    <span class="hint">Ctrl/Cmd+Enter to submit. Tab inserts spaces.</span>
-  </div>
-  <div id="done" class="done" hidden></div>
+  <section id="viewPacks" hidden>
+    <h1>Choose a question pack</h1>
+    <div id="packList" class="grid"></div>
+  </section>
+
+  <section id="viewTopics" hidden>
+    <h1 id="packTitle"></h1>
+    <p class="sub">Choose a topic to drill, or practise everything in the pack.</p>
+    <div id="topicList" class="grid"></div>
+    <p><button id="reset" class="ghost">Reset progress for this pack</button></p>
+  </section>
+
+  <section id="viewDrill" hidden>
+    <div class="meta"><span id="badge" class="badge"></span><span id="counter"></span></div>
+    <p id="prompt" class="prompt"></p>
+    <div id="givenBox" class="given" hidden>
+      <div class="gl">Given</div>
+      <pre id="given"></pre>
+    </div>
+    <textarea id="answer" rows="2" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Your code"></textarea>
+    <div class="actions">
+      <button id="submit" class="primary">Submit</button>
+      <span class="hint">Ctrl/Cmd+Enter to submit. Tab inserts spaces.</span>
+      <span id="score" class="hint right"></span>
+    </div>
+    <div id="done" class="done" hidden></div>
+  </section>
 </main>
 
 <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mtitle">
@@ -40,9 +55,9 @@
     </div>
     <p id="why" class="why"></p>
     <details id="detail"><summary>Compiler / test output</summary><pre id="output"></pre></details>
-    <div class="actions"><button id="next" class="primary">Next drill</button></div>
+    <div class="actions"><button id="retry">Try again</button><button id="next" class="primary">Next drill</button><span class="hint">Esc to retry, Enter for next</span></div>
   </div>
 </div>
-<script src="app.js"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

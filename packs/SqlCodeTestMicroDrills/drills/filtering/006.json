@@ -1,0 +1,14 @@
+{
+  "id": "006",
+  "topic": "filtering",
+  "prompt": "Write a WHERE clause that keeps only the commits whose topic is IN the result of a subquery. The subquery selects topic from `partitions` where log_end_offset is greater than 100.",
+  "given": [
+    "commits(group_id, topic, partition_id, committed_offset)",
+    "partitions p(topic, partition_id, log_end_offset)",
+    "Query: SELECT DISTINCT group_id FROM commits <your clause> ORDER BY group_id"
+  ],
+  "template": "-- EXPECTED: [[\"analytics\"], [\"billing\"], [\"fraud\"], [\"zeta\"]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT DISTINCT group_id\nFROM commits\n@@BLANK@@\nORDER BY group_id;\n",
+  "answer": "WHERE topic IN (SELECT topic FROM partitions WHERE log_end_offset > 100)",
+  "why": "IN with a subquery filters to values returned by the inner query.",
+  "mustContain": null
+}

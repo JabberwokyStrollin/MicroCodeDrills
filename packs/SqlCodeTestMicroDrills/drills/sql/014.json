@@ -1,9 +1,0 @@
-{
-  "id": "014",
-  "section": "sql",
-  "prompt": "Before grouping, keep only rows whose committed_offset is above 50. This filters ROWS, so use WHERE.",
-  "template": "-- EXPECTED: [[\"analytics\", 2], [\"billing\", 2]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT group_id, COUNT(*) AS n\nFROM commits\n@@BLANK@@\nGROUP BY group_id\nHAVING COUNT(*) > 1\nORDER BY group_id;\n",
-  "answer": "WHERE committed_offset > 50",
-  "why": "WHERE filters individual rows before grouping.",
-  "mustContain": null
-}

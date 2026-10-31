@@ -1,0 +1,10 @@
+{
+  "id": "245",
+  "topic": "imports",
+  "prompt": "Write the import statement for the class BufferedReader. Use its complete package path (for example java.util.Something) and do not use a wildcard (*).",
+  "given": [],
+  "template": "@@BLANK@@\n\npublic class Drill {\n    public static void main(String[] args) {\n        BufferedReader x = null;\n        System.out.println(\"PASS\");\n    }\n}\n",
+  "answer": "import java.io.BufferedReader;",
+  "why": "BufferedReader reads input lines quickly.",
+  "mustContain": "importjava.io.BufferedReader;"
+}

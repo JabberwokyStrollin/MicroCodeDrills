@@ -1,9 +1,0 @@
-{
-  "id": "085",
-  "section": "strings",
-  "prompt": "Store the length of words[i] in len[i].",
-  "template": "import java.util.Arrays;\n\npublic class Drill {\n    static int maxPal(String[] words) {\n        int[] c = new int[26];\n        int[] len = new int[words.length];\n        for (int i = 0; i < words.length; i++) {\n            @@BLANK@@\n            for (char ch : words[i].toCharArray()) c[ch - 'a']++;\n        }\n        int pairs = 0;\n        for (int x : c) pairs += x / 2;\n        Arrays.sort(len);\n        int res = 0;\n        for (int L : len) {\n            int need = L / 2;\n            if (need > pairs) break;\n            pairs -= need;\n            res++;\n        }\n        return res;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(maxPal(new String[]{\"abbb\", \"ba\", \"aa\"}), 3);\n        check(maxPal(new String[]{\"abc\", \"ab\"}), 2);\n        check(maxPal(new String[]{\"cd\", \"ef\", \"a\"}), 1);\n        check(maxPal(new String[]{\"abcd\", \"ef\", \"gh\"}), 0);\n        done();\n    }\n}\n",
-  "answer": "len[i] = words[i].length();",
-  "why": "String length is a method: words[i].length() with parentheses. Arrays use the field .length.",
-  "mustContain": null
-}

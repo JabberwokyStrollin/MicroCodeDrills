@@ -1,9 +1,0 @@
-{
-  "id": "004",
-  "section": "sql",
-  "prompt": "Keep only groups whose summed lag is greater than 0. This filters AFTER grouping, so use HAVING.",
-  "template": "-- EXPECTED: [[\"billing\", 60], [\"zeta\", 60], [\"fraud\", 50], [\"analytics\", 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT c.group_id,\n       SUM(p.log_end_offset - c.committed_offset) AS total_lag\nFROM commits c\nJOIN partitions p ON p.topic = c.topic AND p.partition_id = c.partition_id\nGROUP BY c.group_id\n@@BLANK@@\nORDER BY total_lag DESC, c.group_id ASC\n;\n",
-  "answer": "HAVING SUM(p.log_end_offset - c.committed_offset) > 0",
-  "why": "HAVING filters after aggregation; WHERE cannot see SUM. Repeat the aggregate expression because aliases are not available here in all databases.",
-  "mustContain": null
-}

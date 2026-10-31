@@ -1,9 +1,0 @@
-{
-  "id": "007",
-  "section": "program-shape",
-  "prompt": "Read the next line, trim, split on whitespace, parse every piece with a stream (mapToInt), and collect into `int[] nums`. (stream variant)",
-  "template": "import java.io.BufferedReader;\nimport java.io.ByteArrayInputStream;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\nimport java.util.Arrays;\n\npublic class Drill {\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) throws IOException {\n        System.setIn(new ByteArrayInputStream(\"3\\n10 20 5\\n\".getBytes()));\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        int n = Integer.parseInt(br.readLine().trim());\n        @@BLANK@@\n        check(nums.length, 3);\n        check(nums[0] + nums[1] + nums[2], 35);\n        done();\n    }\n}\n",
-  "answer": "int[] nums = Arrays.stream(br.readLine().trim().split(\"\\\\s+\")).mapToInt(Integer::parseInt).toArray();",
-  "why": "Stream variant: split on \"\\\\s+\" (any run of whitespace), mapToInt(Integer::parseInt) gives an IntStream, and toArray() makes the int[].",
-  "mustContain": "mapToInt"
-}

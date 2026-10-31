@@ -1,0 +1,12 @@
+{
+  "id": "001",
+  "topic": "dicts",
+  "prompt": "Count how many times each word appears in the list `words`, storing the result in a variable named `counts`. Use collections.Counter (already imported) and pass the list to it.",
+  "given": [
+    "words = ['a', 'b', 'a']"
+  ],
+  "template": "def check(got, exp):\n    print('PASS' if got == exp else f'FAIL: got {got!r} expected {exp!r}')\n\nfrom collections import Counter\n\nwords = ['a', 'b', 'a']\n@@BLANK@@\ncheck(dict(counts), {'a': 2, 'b': 1})\n",
+  "answer": "counts = Counter(words)",
+  "why": "Counter takes any iterable and returns a dict subclass mapping each item to its count.",
+  "mustContain": null
+}

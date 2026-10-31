@@ -1,0 +1,13 @@
+{
+  "id": "002",
+  "topic": "joins",
+  "prompt": "Write the join so every partition is kept even when no group has committed to it: a LEFT JOIN of `commits` (alias c) onto `partitions` (alias p), matching on both topic and partition_id with AND. The partitions table is on the left.",
+  "given": [
+    "partitions p(topic, partition_id, log_end_offset)",
+    "commits c(group_id, topic, partition_id, committed_offset)"
+  ],
+  "template": "-- EXPECTED: [[\"audit\", 0, 10], [\"empty\", 0, 0], [\"orders\", 0, 100], [\"orders\", 1, 210], [\"payments\", 0, 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT p.topic, p.partition_id,\n       COALESCE(MAX(c.committed_offset), 0) AS best\nFROM partitions p\n@@BLANK@@\nGROUP BY p.topic, p.partition_id\nORDER BY p.topic, p.partition_id;\n",
+  "answer": "LEFT JOIN commits c ON c.topic = p.topic AND c.partition_id = p.partition_id",
+  "why": "LEFT JOIN keeps every row from the left table (partitions) even with no match, filling the commit columns with NULL.",
+  "mustContain": null
+}
