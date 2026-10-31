@@ -1,9 +1,0 @@
-{
-  "id": "018",
-  "section": "program-shape",
-  "prompt": "Print the text x with NO newline after it.",
-  "template": "import java.io.ByteArrayOutputStream;\nimport java.io.PrintStream;\nimport java.util.List;\n\npublic class Drill {\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        PrintStream real = System.out;\n        ByteArrayOutputStream buf = new ByteArrayOutputStream();\n        System.setOut(new PrintStream(buf));\n\n        List<String> words = List.of(\"a\", \"b\", \"c\");\n        System.out.println(words.size());\n        @@BLANK@@\n        System.out.printf(\"%d-%s%n\", 7, \"z\");\n        System.out.println(String.join(\" \", words));\n\n        System.out.flush();\n        System.setOut(real);\n        check(buf.toString().replace(\"\\r\", \"\"), \"3\\nx7-z\\na b c\\n\");\n        done();\n    }\n}\n",
-  "answer": "System.out.print(\"x\");",
-  "why": "print writes without a newline; println would add one and break exact-output checks.",
-  "mustContain": null
-}

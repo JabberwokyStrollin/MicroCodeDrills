@@ -1,0 +1,12 @@
+{
+  "id": "009",
+  "topic": "sorting",
+  "prompt": "Write the ORDER BY clause: highest total_lag first (descending), and when two groups tie, group c.group_id alphabetically (ascending). Name both sort keys with their own direction, separated by a comma.",
+  "given": [
+    "Query: SELECT c.group_id, SUM(...) AS total_lag FROM ... GROUP BY c.group_id HAVING ... <your clause>"
+  ],
+  "template": "-- EXPECTED: [[\"billing\", 60], [\"zeta\", 60], [\"fraud\", 50], [\"analytics\", 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT c.group_id,\n       SUM(p.log_end_offset - c.committed_offset) AS total_lag\nFROM commits c\nJOIN partitions p ON p.topic = c.topic AND p.partition_id = c.partition_id\nGROUP BY c.group_id\nHAVING SUM(p.log_end_offset - c.committed_offset) > 0\n@@BLANK@@\n;\n",
+  "answer": "ORDER BY total_lag DESC, c.group_id ASC",
+  "why": "ORDER BY takes multiple keys separated by commas, each with its own direction. The second key breaks ties.",
+  "mustContain": null
+}

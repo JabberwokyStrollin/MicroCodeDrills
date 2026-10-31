@@ -1,0 +1,13 @@
+{
+  "id": "006",
+  "topic": "lists",
+  "prompt": "Turn the list `nums` into a min-heap in place by assigning h = nums and calling heapq.heapify(h), then store the smallest item, which is always at index 0 of the heap, in a variable named `low`. Write all three lines.",
+  "given": [
+    "nums = [5, 1, 3]",
+    "import heapq (already imported)"
+  ],
+  "template": "def check(got, exp):\n    print('PASS' if got == exp else f'FAIL: got {got!r} expected {exp!r}')\n\nimport heapq\n\nnums = [5, 1, 3]\n@@BLANK@@\ncheck(low, 1)\n",
+  "answer": "h = nums\nheapq.heapify(h)\nlow = h[0]",
+  "why": "heapq.heapify rearranges a list into a min-heap in place; the smallest item is always at index 0.",
+  "mustContain": null
+}

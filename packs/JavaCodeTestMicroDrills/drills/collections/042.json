@@ -1,9 +1,0 @@
-{
-  "id": "042",
-  "section": "collections",
-  "prompt": "Make `List<String> out` a mutable ArrayList copy of `words`.",
-  "template": "import java.util.ArrayList;\nimport java.util.Comparator;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static int weigh(String str) {\n        int total = 0;\n        for (char ch : str.toCharArray()) total += ch;\n        return total;\n    }\n    static List<String> asciiSort(List<String> words) {\n        Map<String, Integer> w = new HashMap<>();\n        for (String s : words) {\n            w.putIfAbsent(s, weigh(s));\n        }\n        @@BLANK@@\n        out.sort(Comparator.comparingInt((String s) -> w.get(s)).thenComparing(Comparator.naturalOrder()));\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(asciiSort(List.of(\"abc\", \"bca\", \"d\")), \"[d, abc, bca]\");\n        check(asciiSort(List.of(\"b\", \"a\", \"a\")), \"[a, a, b]\");\n        check(asciiSort(List.of()), \"[]\");\n        done();\n    }\n}\n",
-  "answer": "List<String> out = new ArrayList<>(words);",
-  "why": "new ArrayList<>(other) makes a mutable copy of another collection.",
-  "mustContain": null
-}

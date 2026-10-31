@@ -1,9 +1,11 @@
 # MicroCodeDrills
 
-Tiny, one-line coding drills you can blitz through in the browser. Each drill shows a complete, runnable
-program with a single piece blanked out and a one-sentence prompt that names exactly what to write. Fill the
-blank, press Submit, and your code is compiled and run against real checks. Right: next drill. Wrong: a pop-up
-shows the expected code and a short explanation of why, then you move on.
+Tiny, one-line coding drills you can blitz through in the browser. Pick a question pack, pick a topic (input,
+output, strings, list/array conversions, lambdas, streams, ...), then fill in the one piece of syntax each drill
+asks for. The prompt spells out every step of a chained conversion, and a short "Given" block shows only the
+variables the answer uses. Press Submit and your code is compiled and run against real checks. Right: next
+drill. Wrong: a pop-up shows the expected code and why, with Try again or Next. You can switch topics at any
+time from the menu at the top of a drill.
 
 ![MicroCodeDrills screenshot](docs/screenshot.png)
 
@@ -27,7 +29,7 @@ Python packs also need `python3` on your PATH, and the SQL pack needs it too.
 
 | Pack | Drills | Covers |
 |---|---|---|
-| `JavaCodeTestMicroDrills` | 264 | Input, collections, strings, sorting, queues and heaps, TreeMap, numbers, streams, algorithm skeletons, imports |
+| `JavaCodeTestMicroDrills` | 253 | Input, collections, strings, sorting, queues and heaps, TreeMap, numbers, streams, algorithm skeletons, imports |
 | `SqlCodeTestMicroDrills` | 15 | Joins, grouping, HAVING, window functions, CASE |
 | `PythonCodeTestMicroDrills` | 6 | Starter pack that shows how another language plugs in |
 

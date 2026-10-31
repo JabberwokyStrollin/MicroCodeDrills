@@ -1,0 +1,12 @@
+{
+  "id": "093",
+  "topic": "conversions",
+  "prompt": "Convert the int array `arr` into a new `List<Integer> numsList` using a stream. Chain four steps: turn the array into a stream with Arrays.stream, box each int into an Integer with boxed(), collect with Collectors.toList(), and assign the result.",
+  "given": [
+    "int[] arr"
+  ],
+  "template": "import java.util.Arrays;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.stream.Collectors;\n\npublic class Drill {\n    static int shortestK(List<Integer> numsList, int k) {\n        int[] nums = numsList.stream().mapToInt(Integer::intValue).toArray();\n        Map<Integer, Integer> cnt = new HashMap<>();\n        int left = 0;\n        int best = Integer.MAX_VALUE;\n        for (int r = 0; r < nums.length; r++) {\n            cnt.merge(nums[r], 1, Integer::sum);\n            while (cnt.size() > k) {\n                int x = nums[left++];\n                if (cnt.merge(x, -1, Integer::sum) == 0) cnt.remove(x);\n            }\n            if (cnt.size() == k) {\n                while (cnt.get(nums[left]) > 1) {\n                    cnt.merge(nums[left], -1, Integer::sum);\n                    left++;\n                }\n                best = Math.min(best, r - left + 1);\n            }\n        }\n        return best == Integer.MAX_VALUE ? -1 : best;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 1, 3, 4};\n        @@BLANK@@\n        check(shortestK(numsList, 3), 3);\n        check(shortestK(List.of(1, 2), 3), -1);\n        check(shortestK(List.of(1, 1, 1, 2), 2), 2);\n        done();\n    }\n}\n",
+  "answer": "List<Integer> numsList = Arrays.stream(arr).boxed().collect(Collectors.toList());",
+  "why": "An int[] cannot be streamed into a List directly: Arrays.stream gives an IntStream, boxed() makes them Integers, collect(Collectors.toList()) makes the list.",
+  "mustContain": "boxed()"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "013",
+  "topic": "expressions",
+  "prompt": "Write the third selected column: the highest committed offset for each partition, or 0 when nobody has committed. Use COALESCE around MAX(c.committed_offset) with 0 as the fallback, and name the column best with AS.",
+  "given": [
+    "partitions p(topic, partition_id, log_end_offset)",
+    "commits c(group_id, topic, partition_id, committed_offset)",
+    "Query: SELECT p.topic, p.partition_id, <your column> FROM partitions p LEFT JOIN commits c ... GROUP BY p.topic, p.partition_id"
+  ],
+  "template": "-- EXPECTED: [[\"audit\", 0, 10], [\"empty\", 0, 0], [\"orders\", 0, 100], [\"orders\", 1, 210], [\"payments\", 0, 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT p.topic, p.partition_id,\n       @@BLANK@@\nFROM partitions p\nLEFT JOIN commits c ON c.topic = p.topic AND c.partition_id = p.partition_id\nGROUP BY p.topic, p.partition_id\nORDER BY p.topic, p.partition_id;\n",
+  "answer": "COALESCE(MAX(c.committed_offset), 0) AS best",
+  "why": "COALESCE replaces NULL with a fallback value, so partitions with no commits show 0.",
+  "mustContain": null
+}

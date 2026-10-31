@@ -1,9 +1,0 @@
-{
-  "id": "009",
-  "section": "sql",
-  "prompt": "Select each topic only once, even if many rows share it.",
-  "template": "-- EXPECTED: [[\"audit\"], [\"orders\"], [\"payments\"]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\n@@BLANK@@\nFROM commits\nORDER BY topic;\n",
-  "answer": "SELECT DISTINCT topic",
-  "why": "DISTINCT removes duplicate rows from the result.",
-  "mustContain": null
-}

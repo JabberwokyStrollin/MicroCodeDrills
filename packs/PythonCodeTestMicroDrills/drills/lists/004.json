@@ -1,0 +1,10 @@
+{
+  "id": "004",
+  "topic": "lists",
+  "prompt": "Create a list named `nums` holding the squares of the numbers 0 through 4, using a list comprehension over range(5): [expression for item in iterable].",
+  "given": [],
+  "template": "def check(got, exp):\n    print('PASS' if got == exp else f'FAIL: got {got!r} expected {exp!r}')\n\n@@BLANK@@\ncheck(nums, [0, 1, 4, 9, 16])\n",
+  "answer": "nums = [i * i for i in range(5)]",
+  "why": "A comprehension is [expression for item in iterable]; range(5) yields 0..4.",
+  "mustContain": null
+}

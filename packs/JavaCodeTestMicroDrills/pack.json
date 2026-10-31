@@ -18,39 +18,91 @@
   ],
   "timeoutSeconds": 15,
   "passToken": "PASS",
-  "sections": [
+  "topics": [
     {
-      "id": "program-shape",
-      "title": "Program Shape"
+      "id": "input",
+      "title": "Input"
     },
     {
-      "id": "collections",
-      "title": "Collections"
+      "id": "output",
+      "title": "Output"
+    },
+    {
+      "id": "signature",
+      "title": "Method Signatures"
     },
     {
       "id": "strings",
-      "title": "Strings"
+      "title": "String Methods"
+    },
+    {
+      "id": "stringbuilder",
+      "title": "StringBuilder"
+    },
+    {
+      "id": "characters",
+      "title": "Characters"
+    },
+    {
+      "id": "lists",
+      "title": "Lists"
+    },
+    {
+      "id": "arrays",
+      "title": "Arrays"
+    },
+    {
+      "id": "conversions",
+      "title": "List and Array Conversions"
+    },
+    {
+      "id": "maps",
+      "title": "Maps"
+    },
+    {
+      "id": "sets",
+      "title": "Sets"
     },
     {
       "id": "sorting",
-      "title": "Sorting and Comparators"
+      "title": "Sorting"
     },
     {
-      "id": "queues-stacks-heaps-trees",
-      "title": "Queues, Stacks, Heaps, Trees"
+      "id": "lambdas",
+      "title": "Lambdas and Comparators"
     },
     {
-      "id": "numbers-streams",
-      "title": "Numbers and Streams"
+      "id": "queues",
+      "title": "Queues, Deques and Stacks"
     },
     {
-      "id": "algorithm-skeletons",
-      "title": "Algorithm Skeletons"
+      "id": "heaps",
+      "title": "Heaps (PriorityQueue)"
+    },
+    {
+      "id": "treemap",
+      "title": "TreeMap and TreeSet"
+    },
+    {
+      "id": "records",
+      "title": "Records and Classes"
+    },
+    {
+      "id": "math",
+      "title": "Math and Numbers"
+    },
+    {
+      "id": "streams",
+      "title": "Streams"
+    },
+    {
+      "id": "patterns",
+      "title": "Algorithm Patterns"
     },
     {
       "id": "imports",
       "title": "Imports"
     }
   ],
-  "count": 264
+  "count": 253
 }

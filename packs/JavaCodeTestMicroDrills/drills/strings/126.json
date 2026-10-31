@@ -1,9 +1,0 @@
-{
-  "id": "126",
-  "section": "strings",
-  "prompt": "Check with two pointers instead: i from the front, j from the back, return false on the first mismatch, true otherwise. (two-pointer variant)",
-  "template": "public class Drill {\n    static boolean isPalindrome(String s) {\n        @@BLANK@@\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(isPalindrome(\"racecar\"), true);\n        check(isPalindrome(\"abca\"), false);\n        check(isPalindrome(\"a\"), true);\n        check(isPalindrome(\"\"), true);\n        done();\n    }\n}\n",
-  "answer": "int i = 0, j = s.length() - 1;\nwhile (i < j) {\n    if (s.charAt(i++) != s.charAt(j--)) return false;\n}\nreturn true;",
-  "why": "Two-pointer variant: move i up and j down, return false on the first mismatch, and true if the pointers meet.",
-  "mustContain": "i<j"
-}

@@ -1,0 +1,12 @@
+{
+  "id": "089",
+  "topic": "conversions",
+  "prompt": "Create a two-dimensional int array named `g` with one row for each element of the nested list `rows` and two columns. Use rows.size() for the row count.",
+  "given": [
+    "List<List<Integer>> rows"
+  ],
+  "template": "import java.util.Arrays;\nimport java.util.List;\nimport java.util.PriorityQueue;\n\npublic class Drill {\n    static int minRooms(List<List<Integer>> rows) {\n        @@BLANK@@\n        for (int i = 0; i < g.length; i++) {\n            g[i][0] = rows.get(i).get(0);\n            g[i][1] = rows.get(i).get(1);\n        }\n        Arrays.sort(g, (x, y) -> Integer.compare(x[0], y[0]));\n        PriorityQueue<Integer> ends = new PriorityQueue<>();\n        for (int[] m : g) {\n            if (!ends.isEmpty() && ends.peek() <= m[0]) ends.poll();\n            ends.offer(m[1]);\n        }\n        return ends.size();\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(minRooms(List.of(List.of(5, 7), List.of(1, 10), List.of(2, 3))), 2);\n        check(minRooms(List.of(List.of(1, 2), List.of(2, 3))), 1);\n        check(minRooms(List.of(List.of(1, 4), List.of(2, 5), List.of(3, 6))), 3);\n        done();\n    }\n}\n",
+  "answer": "int[][] g = new int[rows.size()][2];",
+  "why": "A 2D array is created with both sizes: rows.size() rows and 2 columns, written new int[rows.size()][2].",
+  "mustContain": null
+}

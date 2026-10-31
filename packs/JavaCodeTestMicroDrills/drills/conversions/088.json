@@ -1,0 +1,14 @@
+{
+  "id": "088",
+  "topic": "conversions",
+  "prompt": "Copy the first number of row `i` of the nested list `intervals` into element `i` of the int array `st`. Get the row with get(i), then get the number at position 0 with a second get.",
+  "given": [
+    "List<List<Integer>> intervals",
+    "int[] st",
+    "int i"
+  ],
+  "template": "import java.util.Arrays;\nimport java.util.List;\n\npublic class Drill {\n    static int minMeetingRooms(List<List<Integer>> intervals) {\n        int n = intervals.size();\n        int[] st = new int[n], en = new int[n];\n        for (int i = 0; i < n; i++) {\n            @@BLANK@@\n            en[i] = intervals.get(i).get(1);\n        }\n        Arrays.sort(st);\n        Arrays.sort(en);\n        int rooms = 0, best = 0, j = 0;\n        for (int s : st) {\n            while (j < n && en[j] <= s) { j++; rooms--; }\n            rooms++;\n            best = Math.max(best, rooms);\n        }\n        return best;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(minMeetingRooms(List.of(List.of(5, 7), List.of(1, 10), List.of(2, 3))), 2);\n        check(minMeetingRooms(List.of(List.of(1, 2), List.of(2, 3))), 1);\n        check(minMeetingRooms(List.of(List.of(1, 5), List.of(1, 5), List.of(5, 6), List.of(5, 6))), 2);\n        check(minMeetingRooms(List.of(List.of(10, 20), List.of(1, 5), List.of(2, 6))), 2);\n        check(minMeetingRooms(List.of()), 0);\n        done();\n    }\n}\n",
+  "answer": "st[i] = intervals.get(i).get(0);",
+  "why": "A List<List<Integer>> needs two get calls: get(i) for the row, then get(0) for the first number. Auto-unboxing converts it to int.",
+  "mustContain": null
+}

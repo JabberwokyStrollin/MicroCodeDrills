@@ -1,0 +1,14 @@
+{
+  "id": "148",
+  "topic": "queues",
+  "prompt": "Open a while loop that keeps running while the stack is not empty and the temperature at the index on top of the stack, t[stack.peek()], is lower than t[i]. End the line with the opening brace.",
+  "given": [
+    "int[] t",
+    "Deque<Integer> stack",
+    "int i"
+  ],
+  "template": "import java.util.ArrayDeque;\nimport java.util.Arrays;\nimport java.util.Deque;\n\npublic class Drill {\n    static int[] dailyTemps(int[] t) {\n        int[] ans = new int[t.length];\n        Deque<Integer> stack = new ArrayDeque<>();\n        for (int i = 0; i < t.length; i++) {\n            @@BLANK@@\n                int j = stack.pop();\n                ans[j] = i - j;\n            }\n            stack.push(i);\n        }\n        return ans;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(Arrays.toString(dailyTemps(new int[]{73, 74, 75, 71, 69, 72, 76, 73})), \"[1, 1, 4, 2, 1, 1, 0, 0]\");\n        done();\n    }\n}\n",
+  "answer": "while (!stack.isEmpty() && t[stack.peek()] < t[i]) {",
+  "why": "peek returns the top without removing it. t[stack.peek()] looks up the temperature at that index.",
+  "mustContain": null
+}

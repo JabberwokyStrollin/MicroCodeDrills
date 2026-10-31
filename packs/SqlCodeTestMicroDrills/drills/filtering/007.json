@@ -1,0 +1,13 @@
+{
+  "id": "007",
+  "topic": "filtering",
+  "prompt": "Write the clause that filters individual rows before they are grouped: WHERE committed_offset is greater than 50. Row filters use WHERE, not HAVING.",
+  "given": [
+    "commits(group_id, topic, partition_id, committed_offset)",
+    "Query: SELECT group_id, COUNT(*) AS n FROM commits <your clause> GROUP BY group_id HAVING COUNT(*) > 1"
+  ],
+  "template": "-- EXPECTED: [[\"analytics\", 2], [\"billing\", 2]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT group_id, COUNT(*) AS n\nFROM commits\n@@BLANK@@\nGROUP BY group_id\nHAVING COUNT(*) > 1\nORDER BY group_id;\n",
+  "answer": "WHERE committed_offset > 50",
+  "why": "WHERE filters individual rows before grouping.",
+  "mustContain": null
+}

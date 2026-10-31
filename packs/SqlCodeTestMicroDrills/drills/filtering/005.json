@@ -1,0 +1,14 @@
+{
+  "id": "005",
+  "topic": "filtering",
+  "prompt": "Write the clause that keeps only groups whose total lag is above zero. This test is on an aggregate, so it must come after GROUP BY and use HAVING with SUM(p.log_end_offset - c.committed_offset) > 0.",
+  "given": [
+    "commits c(group_id, topic, partition_id, committed_offset)",
+    "partitions p(topic, partition_id, log_end_offset)",
+    "Query: SELECT c.group_id, SUM(...) AS total_lag FROM ... GROUP BY c.group_id <your clause> ORDER BY ..."
+  ],
+  "template": "-- EXPECTED: [[\"billing\", 60], [\"zeta\", 60], [\"fraud\", 50], [\"analytics\", 40]]\n\n-- Tables are loaded for you: partitions(topic, partition_id, log_end_offset) and commits(group_id, topic, partition_id, committed_offset).\nSELECT c.group_id,\n       SUM(p.log_end_offset - c.committed_offset) AS total_lag\nFROM commits c\nJOIN partitions p ON p.topic = c.topic AND p.partition_id = c.partition_id\nGROUP BY c.group_id\n@@BLANK@@\nORDER BY total_lag DESC, c.group_id ASC\n;\n",
+  "answer": "HAVING SUM(p.log_end_offset - c.committed_offset) > 0",
+  "why": "HAVING filters after aggregation; WHERE cannot see SUM. Repeat the aggregate expression because aliases are not available here in all databases.",
+  "mustContain": null
+}

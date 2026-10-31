@@ -1,9 +1,0 @@
-{
-  "id": "056",
-  "section": "collections",
-  "prompt": "Put key \"d\" with value 7 only if \"d\" is not already present.",
-  "template": "import java.util.HashMap;\nimport java.util.Map;\n\npublic class Drill {\n    static String run() {\n        String[] words = {\"b\", \"a\", \"b\", \"c\", \"b\", \"a\"};\n        Map<String, Integer> m = new HashMap<>();\n        for (String w : words) {\n            m.merge(w, 1, Integer::sum);\n        }\n        int b = m.get(\"b\");\n        boolean hasZ = m.containsKey(\"z\");\n        int z = m.getOrDefault(\"z\", 0);\n        m.remove(\"c\");\n        @@BLANK@@\n        m.put(\"a\", 10);\n        return b + \" \" + hasZ + \" \" + z + \" \" + m.size() + \" \" + m.get(\"a\") + \" \" + m.get(\"d\");\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(run(), \"3 false 0 3 10 7\");\n        done();\n    }\n}\n",
-  "answer": "m.putIfAbsent(\"d\", 7);",
-  "why": "putIfAbsent inserts only when the key is missing and leaves an existing value alone.",
-  "mustContain": null
-}

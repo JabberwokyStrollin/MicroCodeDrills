@@ -1,9 +1,0 @@
-{
-  "id": "106",
-  "section": "strings",
-  "prompt": "Return the sum of the char codes of `str`: add each char to an int total in a for-each over toCharArray(). (loop variant)",
-  "template": "import java.util.ArrayList;\nimport java.util.Comparator;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static int weigh(String str) {\n        @@BLANK@@\n    }\n    static List<String> asciiSort(List<String> words) {\n        Map<String, Integer> w = new HashMap<>();\n        for (String s : words) {\n            w.putIfAbsent(s, weigh(s));\n        }\n        List<String> out = new ArrayList<>(words);\n        out.sort(Comparator.comparingInt((String s) -> w.get(s)).thenComparing(Comparator.naturalOrder()));\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(asciiSort(List.of(\"abc\", \"bca\", \"d\")), \"[d, abc, bca]\");\n        check(asciiSort(List.of(\"b\", \"a\", \"a\")), \"[a, a, b]\");\n        check(asciiSort(List.of()), \"[]\");\n        done();\n    }\n}\n",
-  "answer": "int total = 0;\nfor (char ch : str.toCharArray()) total += ch;\nreturn total;",
-  "why": "Loop variant: toCharArray() yields chars, and adding a char to an int adds its numeric code.",
-  "mustContain": "toCharArray()"
-}

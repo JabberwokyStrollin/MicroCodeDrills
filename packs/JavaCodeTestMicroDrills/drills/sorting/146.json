@@ -1,9 +1,0 @@
-{
-  "id": "146",
-  "section": "sorting",
-  "prompt": "Store the weight of s in `w` only if s is not already there (putIfAbsent), so each weight is computed once.",
-  "template": "import java.util.ArrayList;\nimport java.util.Comparator;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\npublic class Drill {\n    static int weigh(String str) {\n        int total = 0;\n        for (char ch : str.toCharArray()) total += ch;\n        return total;\n    }\n    static List<String> asciiSort(List<String> words) {\n        Map<String, Integer> w = new HashMap<>();\n        for (String s : words) {\n            @@BLANK@@\n        }\n        List<String> out = new ArrayList<>(words);\n        out.sort(Comparator.comparingInt((String s) -> w.get(s)).thenComparing(Comparator.naturalOrder()));\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(asciiSort(List.of(\"abc\", \"bca\", \"d\")), \"[d, abc, bca]\");\n        check(asciiSort(List.of(\"b\", \"a\", \"a\")), \"[a, a, b]\");\n        check(asciiSort(List.of()), \"[]\");\n        done();\n    }\n}\n",
-  "answer": "w.putIfAbsent(s, weigh(s));",
-  "why": "putIfAbsent only computes a new value for a new key, so each string is weighed once. Note the argument expression still runs each call.",
-  "mustContain": null
-}

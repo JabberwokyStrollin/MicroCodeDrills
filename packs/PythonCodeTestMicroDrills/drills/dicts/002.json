@@ -1,0 +1,12 @@
+{
+  "id": "002",
+  "topic": "dicts",
+  "prompt": "Create a dict named `d` that maps each word in `words` to its length, using a dict comprehension: {key: value for item in iterable}, with len(w) as the value.",
+  "given": [
+    "words = ['hi', 'there']"
+  ],
+  "template": "def check(got, exp):\n    print('PASS' if got == exp else f'FAIL: got {got!r} expected {exp!r}')\n\nwords = ['hi', 'there']\n@@BLANK@@\ncheck(d, {'hi': 2, 'there': 5})\n",
+  "answer": "d = {w: len(w) for w in words}",
+  "why": "A dict comprehension is {key: value for item in iterable}.",
+  "mustContain": null
+}

@@ -7,7 +7,7 @@ A pack is a folder under `packs/`. Named in Java style: `<Language>CodeTestMicro
 ```
 packs/<PackId>/
   pack.json
-  drills/<section-id>/NNN.json
+  drills/<topic-id>/NNN.json
   runner/            optional helper scripts
 ```
 
@@ -20,7 +20,7 @@ packs/<PackId>/
 | `compile` | Optional command list, run first. Skip for interpreted languages |
 | `run` | Command list that runs the program. It must print `PASS` when correct |
 | `timeoutSeconds`, `passToken` | Run limit and the success text (default `PASS`) |
-| `sections` | `[{id, title}]` in display order. Each id is a folder under `drills/` |
+| `topics` | `[{id, title}]` in display order. Each id is a folder under `drills/`; learners pick a topic after picking the pack |
 
 Command lists may use `{file}` (the written source file), `{outDir}` (a temp folder) and `{packDir}`.
 
@@ -28,14 +28,17 @@ Command lists may use `{file}` (the written source file), `{outDir}` (a temp fol
 ```json
 {
   "id": "001",
-  "section": "collections",
-  "prompt": "One or two sentences. Name the exact variant to write.",
+  "topic": "lists",
+  "prompt": "State every step and the exact variant, e.g. convert to an array, stream it with a lambda, collect to a list.",
+  "given": ["List<Integer> nums"],
   "template": "...full program...\n    @@BLANK@@\n...",
   "answer": "the reference code for the blank",
   "why": "One or two sentences on why it is written that way.",
   "mustContain": null
 }
 ```
+- `given` lists type-only declarations of the variables the answer uses. Only those are shown, never the whole program.
+- Write prompts so a chain of conversions names each step in order. Do not repeat a drill that tests the same syntax.
 - Put `@@BLANK@@` alone on its own line; the app indents every answer line to match.
 - The program must print `PASS` only if all checks succeed, and must not pass with the blank empty.
 - `mustContain` (optional) is text the answer must include, ignoring whitespace. Use it when the prompt names a

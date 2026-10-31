@@ -1,0 +1,12 @@
+{
+  "id": "003",
+  "topic": "dicts",
+  "prompt": "Read the value of the key 'z' from the dict `m` into a variable named `z`, using 0 when the key is missing. Use the dict method that takes a default value, so a missing key does not raise KeyError.",
+  "given": [
+    "m = {'a': 1}"
+  ],
+  "template": "def check(got, exp):\n    print('PASS' if got == exp else f'FAIL: got {got!r} expected {exp!r}')\n\nm = {'a': 1}\n@@BLANK@@\ncheck(z, 0)\n",
+  "answer": "z = m.get('z', 0)",
+  "why": "dict.get(key, default) returns the default instead of raising KeyError.",
+  "mustContain": null
+}

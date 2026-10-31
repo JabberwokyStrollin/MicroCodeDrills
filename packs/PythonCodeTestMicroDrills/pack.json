@@ -10,11 +10,15 @@
   ],
   "timeoutSeconds": 10,
   "passToken": "PASS",
-  "sections": [
+  "count": 6,
+  "topics": [
     {
-      "id": "collections",
-      "title": "Collections"
+      "id": "dicts",
+      "title": "Dictionaries and Counting"
+    },
+    {
+      "id": "lists",
+      "title": "Lists, Sorting and Heaps"
     }
-  ],
-  "count": 6
+  ]
 }

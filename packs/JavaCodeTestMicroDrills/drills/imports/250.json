@@ -1,0 +1,10 @@
+{
+  "id": "250",
+  "topic": "imports",
+  "prompt": "Write the import statement for the class OutputStreamWriter. Use its complete package path (for example java.util.Something) and do not use a wildcard (*).",
+  "given": [],
+  "template": "@@BLANK@@\n\npublic class Drill {\n    public static void main(String[] args) {\n        OutputStreamWriter x = null;\n        System.out.println(\"PASS\");\n    }\n}\n",
+  "answer": "import java.io.OutputStreamWriter;",
+  "why": "OutputStreamWriter turns the System.out byte stream into characters.",
+  "mustContain": "importjava.io.OutputStreamWriter;"
+}

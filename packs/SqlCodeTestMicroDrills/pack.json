@@ -11,11 +11,31 @@
   ],
   "timeoutSeconds": 10,
   "passToken": "PASS",
-  "sections": [
+  "count": 15,
+  "topics": [
     {
-      "id": "sql",
-      "title": "SQL"
+      "id": "joins",
+      "title": "Joins"
+    },
+    {
+      "id": "aggregation",
+      "title": "Aggregation"
+    },
+    {
+      "id": "filtering",
+      "title": "Filtering (WHERE, HAVING, IN)"
+    },
+    {
+      "id": "sorting",
+      "title": "Sorting and Limits"
+    },
+    {
+      "id": "window",
+      "title": "Window Functions"
+    },
+    {
+      "id": "expressions",
+      "title": "Expressions (COALESCE, DISTINCT, CASE)"
     }
-  ],
-  "count": 15
+  ]
 }

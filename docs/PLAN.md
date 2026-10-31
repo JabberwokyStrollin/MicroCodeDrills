@@ -22,18 +22,18 @@ then moves on. Nothing leaves your machine and nothing calls an AI at runtime.
 ## Pack format
 ```
 packs/<PackId>/
-  pack.json          id, title, language, sourceFile, blankMarker, compile/run commands, timeout, sections
-  drills/<section>/NNN.json
+  pack.json          id, title, language, sourceFile, blankMarker, compile/run commands, timeout, topics
+  drills/<topic>/NNN.json
   runner/            optional helper scripts used by run commands
 ```
-Drill file: `id, section, prompt, template, answer, why, mustContain`. The template holds the whole program
+Drill file: `id, topic, prompt, given, template, answer, why, mustContain`. The template (kept server-side, never shown) holds the whole program
 with the line `@@BLANK@@` where the learner's code goes. Run commands may use `{file}`, `{outDir}`, `{packDir}`.
 Adding a language means adding a folder; no app code changes.
 
 ## Phases
 1. Repo skeleton, pack format, scrubbed export of all drills (done).
 2. Java runner and grader: splice, compile, run with timeout in a child process, localhost-only server.
-3. Web UI: drill screen, Submit and Ctrl+Enter, result pop-up with answer and why, section picker, local progress file.
+3. Web UI: drill screen, Submit and Ctrl+Enter, result pop-up with answer and why, pack and topic pickers, local progress file.
 4. Write the `why` text for every drill and tighten variant prompts and `mustContain` rules.
 5. README with screenshots, authoring guide, CI that checks every answer passes and every blank fails, Python and extra packs.
 

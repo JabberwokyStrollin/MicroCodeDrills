@@ -1,0 +1,10 @@
+{
+  "id": "042",
+  "topic": "stringbuilder",
+  "prompt": "Declare a new empty StringBuilder named `sb`.",
+  "given": [],
+  "template": "import java.util.ArrayList;\nimport java.util.List;\n\npublic class Drill {\n    static String csv(List<String> parts) {\n        @@BLANK@@\n        for (String p : parts) {\n            sb.append(p).append(',');\n        }\n        sb.deleteCharAt(sb.length() - 1);\n        return sb.toString();\n    }\n    static String bracket(String s) {\n        StringBuilder sb = new StringBuilder(s);\n        sb.insert(0, '[');\n        sb.append(']');\n        int n = sb.length();\n        return sb.toString() + n;\n    }\n    static List<String> chunks(String s) {\n        List<String> out = new ArrayList<>();\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < s.length(); i++) {\n            char c = s.charAt(i);\n            if (c == ',') {\n                out.add(sb.toString());\n                sb.setLength(0);\n            } else {\n                sb.append(c);\n            }\n        }\n        out.add(sb.toString());\n        return out;\n    }\n    static String rev(String s) {\n        return new StringBuilder(s).reverse().toString();\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(csv(List.of(\"a\", \"b\", \"c\")), \"a,b,c\");\n        check(bracket(\"ab\"), \"[ab]4\");\n        check(chunks(\"a,bc,d\"), \"[a, bc, d]\");\n        check(rev(\"abc\"), \"cba\");\n        done();\n    }\n}\n",
+  "answer": "StringBuilder sb = new StringBuilder();",
+  "why": "new StringBuilder() creates an empty mutable buffer for efficient building.",
+  "mustContain": null
+}

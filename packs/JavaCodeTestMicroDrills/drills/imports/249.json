@@ -1,0 +1,10 @@
+{
+  "id": "249",
+  "topic": "imports",
+  "prompt": "Write the import statement for the class BufferedWriter. Use its complete package path (for example java.util.Something) and do not use a wildcard (*).",
+  "given": [],
+  "template": "@@BLANK@@\n\npublic class Drill {\n    public static void main(String[] args) {\n        BufferedWriter x = null;\n        System.out.println(\"PASS\");\n    }\n}\n",
+  "answer": "import java.io.BufferedWriter;",
+  "why": "BufferedWriter buffers output text.",
+  "mustContain": "importjava.io.BufferedWriter;"
+}

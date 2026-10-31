@@ -1,9 +1,0 @@
-{
-  "id": "147",
-  "section": "sorting",
-  "prompt": "Create `TreeMap<Integer, List<String>> byWeight` (weights come out in ascending order).",
-  "template": "import java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.List;\nimport java.util.TreeMap;\n\npublic class Drill {\n    static int weigh(String str) {\n        return str.chars().sum();\n    }\n    static List<String> asciiSort(List<String> words) {\n        @@BLANK@@\n        for (String s : words) {\n            byWeight.computeIfAbsent(weigh(s), k -> new ArrayList<>()).add(s);\n        }\n        List<String> out = new ArrayList<>(words.size());\n        for (List<String> bucket : byWeight.values()) {\n            Collections.sort(bucket);\n            out.addAll(bucket);\n        }\n        return out;\n    }\n\n    static int bad = 0;\n    static void check(Object got, Object exp) {\n        String g = String.valueOf(got), e = String.valueOf(exp);\n        if (!g.equals(e)) { bad++; System.out.println(\"FAIL: got \" + g + \" expected \" + e); }\n    }\n    static void done() { if (bad == 0) System.out.println(\"PASS\"); }\n\n    public static void main(String[] args) {\n        check(asciiSort(List.of(\"bca\", \"abc\", \"d\")), \"[d, abc, bca]\");\n        check(asciiSort(List.of(\"b\", \"a\", \"a\")), \"[a, a, b]\");\n        done();\n    }\n}\n",
-  "answer": "TreeMap<Integer, List<String>> byWeight = new TreeMap<>();",
-  "why": "TreeMap keeps its keys sorted, so iterating values() gives buckets in ascending weight order.",
-  "mustContain": null
-}

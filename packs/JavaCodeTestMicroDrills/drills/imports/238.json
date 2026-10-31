@@ -1,0 +1,10 @@
+{
+  "id": "238",
+  "topic": "imports",
+  "prompt": "Write the import statement for the class Arrays. Use its complete package path (for example java.util.Something) and do not use a wildcard (*).",
+  "given": [],
+  "template": "@@BLANK@@\n\npublic class Drill {\n    public static void main(String[] args) {\n        int[] a = new int[1]; Arrays.fill(a, 0);\n        System.out.println(\"PASS\");\n    }\n}\n",
+  "answer": "import java.util.Arrays;",
+  "why": "Arrays holds the static helpers for arrays such as sort, fill and copyOf.",
+  "mustContain": "importjava.util.Arrays;"
+}
